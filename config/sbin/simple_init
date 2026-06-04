@@ -1,0 +1,18 @@
+#!/bin/bash
+
+/usr/bin/mount -t proc none /proc
+/usr/bin/mount -t sysfs none /sys
+
+/usr/sbin/ip link set up eth0
+/usr/sbin/ip addr add 10.0.2.15/24 dev eth0
+/usr/sbin/ip route add 10.0.2.2 dev eth0
+/usr/sbin/ip route add 0/0 via 10.0.2.2 dev eth0
+
+df
+
+syslogd &
+
+# exec /sbin/agetty -
+
+
+exec /bin/bash

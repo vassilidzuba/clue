@@ -1,0 +1,29 @@
+# commands
+dir /bin 0755 0 0
+file /bin/bash /bin/bash 0755 0 0
+slink /bin/sh /bin/bash 0777 0 0
+file /bin/mount $UTILS/klibc-1.1.1/utils/static/mount 0755 0 0
+file /bin/cat /bin/cat 0755 0 0
+file /bin/mknod /bin/mknod 0755 0 0
+file /bin/fstype $UTILS/klibc-1.1.1/utils/static/fstype 0755 0 0
+file /bin/run-init $UTILS/klibc-1.1.1/utils/static/run-init 0755 0 0
+
+file /init $SCRIPTS/init 0755 0 0
+
+# supporting libraries
+dir /lib 0755 0 0
+file /lib/ld-linux.so.2 /lib/ld-linux.so.2 0755 0 0
+file /lib/libc.so.6 /lib/libc.so.6 0755 0 0
+file /lib/libdl.so.2 /lib/libdl.so.2 0755 0 0
+file /lib/libncurses.so.5 /lib/libncurses.so.5 0755 0 0
+file /lib/libhistory.so.5.0 /lib/libhistory.so.5.0 0755 0 0
+file /lib/libreadline.so.5.0 /lib/libreadline.so.5.0 0755 0 0
+
+# supporting directories
+dir /proc 0755 0 0
+dir /new-root 0755 0 0
+
+# initial device files required
+dir /dev 0755 0 0
+nod /dev/console 0600 0 0 c 5 1
+nod /dev/null 0666 0 0 c 1 3

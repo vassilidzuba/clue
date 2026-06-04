@@ -1,0 +1,14 @@
+---
+suffix: systemd
+devicetype: disk
+fstype: btrfs
+luks: no
+device: /dev/sdb3
+label: XLFS-SD
+xlfs: /mnt/xlfs-systemd
+backup: /mnt/backup/backups
+options:
+   with_systemd:    true
+   with_s6:         false
+   with_vim:        false
+   with_nano:       true

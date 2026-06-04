@@ -1,0 +1,24 @@
+---
+suffix: qsystemd
+devicetype: qemu
+fstype: ext4
+luks: false
+image: qsystemd.img
+image_size: 30G
+device: /dev/nbd2
+partition: /dev/nbd2p1
+label: XLFS-QS
+xlfs: /mnt/xlfs-qsystemd
+backup: /mnt/backup/backups
+kernel: vmlinux-7.0.10-xlfs
+config:
+   user: john
+   password: foobar
+options:
+   with_systemd:    true
+   with_s6:         false
+   with_simple:     false
+   with_vim:        false
+   with_nano:       true
+   with_initramfs:  false
+   with_btrfs:      false

@@ -1,0 +1,26 @@
+---
+suffix: qlsystemd
+devicetype: qemu
+fstype: btrfs
+luks: true
+luks_passphrase: "to be or not to be"
+luks_name: xlfs-qls
+image: qlsystemd.img
+image_size: 30G
+device: /dev/nbd2
+partition: /dev/nbd2p1
+label: XLFS-QLS
+xlfs: /mnt/xlfs-qlsystemd
+backup: /mnt/backup/backups
+kernel: vmlinux-7.0.10-xlfs
+config:
+   user: john
+   password: foobar
+options:
+   with_systemd:    true
+   with_s6:         false
+   with_simple:     false
+   with_vim:        false
+   with_nano:       true
+   with_initramfs:  true
+   with_btrfs:      true

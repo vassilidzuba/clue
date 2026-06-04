@@ -1,0 +1,13 @@
+---
+suffix: s6
+devicetype: partition
+filesystem: ext4
+luks: no
+device; /dev/sdb5
+label: MYXLFS
+xlfs: /mnt/myxlfs
+options:
+   with_systemd:    false
+   with_s6:         true
+   with_vim:        false
+   with_nano:       true
