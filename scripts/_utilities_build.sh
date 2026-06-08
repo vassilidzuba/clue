@@ -60,9 +60,10 @@ load_archive () {
         exit "File '$name' is not available in /mnt/shared/shared"
     fi
     verify_checksum "$name" "$subtype" "$sum"
-    cp "$name" $TMPDIR
-    ADDITIONALARCHIVE="$name"
     popd
+
+    echo "copy $name to $TMPDIR"
+    cp "shared/$name" "$TMPDIR"
 }
 
 load_patch () {
@@ -184,7 +185,8 @@ run_buildpackage() {
 run_all () {
     start=`date +%s`
 
-    echo "Starting $(basename \"$0\")..."
+    local bn=$(basename "$0")
+    echo "Starting $bn..."
 
     run_prolog
 
@@ -265,3 +267,33 @@ depends-on () {
 
     echo "Dependency on $1: ok";
 }
+
+
+if [ "$INCHROOT" == "1" ]; then
+    # stage 1
+
+    ROOT=$(pwd)
+    SCRIPT=$(basename "$0")
+    TMPDIR=/tmp
+    SRCDIR=/mnt/shared/shared
+    FLAG=/flags/stage1/$SCRIPT
+    LOGDIR=/var/log
+
+    PACKAGEDIR=/mnt/shared/packages
+    [ "$BUILDPACKAGE" = "" ] &&  BUILDPACKAGE=false
+    [ "$NOTEST" = "" ] &&  NOTEST=false
+    [ "$NOINSTALL" = "" ] && NOINSTALL=false
+    [ "$INSTALLBINARY" = "" ] && INSTALLBINARY=false
+    [ "$GENERATEBINARY" = "" ] && GENERATEBINARY=false
+
+    ADDITIONALARCHIVE=
+    ADDITIONALPATCH=
+
+    STAGE=stage1
+
+    sudo=
+
+    echo "Start build of $SCRIPT"
+
+    check_flag
+fi

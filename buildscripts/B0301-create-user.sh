@@ -1,17 +1,11 @@
 #!/bin/bash
 
-if [ "$INCHROOT" != "1" ]; then
-    echo "Not in chroot"
-    exit 255
-fi
-cd /mnt/shared
 if [ ! -f i_am_at_root ]; then
     echo "/mnt/shared has probably not been mounted to the root of the repo"
     exit 255
 fi
 
-source scripts/_utilities.sh
-source stage1/scripts/_utilities_stage1.sh
+source scripts/_utilities_build.sh
 
 PACKAGE=
 SOURCE=
@@ -28,7 +22,7 @@ run_test () {
 
 run_install () {
     if [ ! -d /etc/skel ]; then
-        cp -r stage1/config/etc/skel /etc
+        cp -r $ROOT/config/etc/skel /etc
     fi
 
     user="$(get-value '.config.user')"
@@ -43,9 +37,11 @@ run_install () {
         echo "Creating user $user"
         useradd -m -g "$user" "$user"
         echo "$password" | passwd --stdin "$user"
+        usermod -aG wheel $user
     fi
 
-    echo "creating user $user with passwrd $password"
+    echo "creating user $user with password $password."
+    echo "do not forget to change it."
 }
 
 run_all

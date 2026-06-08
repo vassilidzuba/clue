@@ -62,16 +62,23 @@ start-qemu ()  {
         initramfs="-initrd boot/initramfs-$VERSION-xlfs"
     fi
 
+
+nographic=-nographic
+
+
     stty intr ^]
     exec-command \
       "qemu-system-x86_64 \
         -kernel $kernel \
-        -append \"root=/dev/sda1 console=ttyS0\" \
+        -append \"root=/dev/sda1 rw console=ttyS0\" \
         -enable-kvm \
         -cpu host \
         -m 4G \
+        -netdev user,id=net0,hostfwd=tcp::2222-:22 \
+        -device e1000,netdev=net0 \
         $initramfs \
-        -nographic \
+        $nographic \
+        -virtfs local,path=/home/vassili/git/clue,mount_tag=CLUE,security_model=mapped-xattr,readonly,multidevs=warn \
         $image"
 }
 

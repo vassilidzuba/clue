@@ -125,11 +125,18 @@ run L879-util-linux.sh
 run L880-e2fsprogs.sh
 run L881-stripping.sh
 run L882-cleanup.sh
-with-option nano && run B001-nano.sh
 
 run L951-kernel.sh
 
+run L900-network-configuration.sh
 
 with-option systemd && run L875-systemd.sh
 with-option systemd && run L876-d-bus.sh
-with-option systemd && run L907-configure-systemd.sh
+with-option systemd && run L907-configuring-systemd.sh
+
+run B0301-create-user.sh
+run B0401-openssh.sh
+with-option nano && run B0601-nano.sh
+run B0402-sudo.sh
+
+run E016-neofetch.sh

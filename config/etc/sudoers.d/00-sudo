@@ -1,2 +1,2 @@
 Defaults secure_path="/usr/sbin:/usr/bin"
-%wheel ALL=(ALL) NOPASSWORD: ALL
+%wheel ALL=(ALL) NOPASSWD: ALL

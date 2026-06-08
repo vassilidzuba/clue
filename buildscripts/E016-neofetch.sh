@@ -5,26 +5,25 @@ if [ ! -f i_am_at_root ]; then
     exit 255
 fi
 
-
 source scripts/_utilities_build.sh
 
-PACKAGE=psmisc-23.7
-SOURCE=psmisc-23.7.tar.xz
-URL=https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.7.tar.xz
-MD5=53eae841735189a896d614cba440eb10
+PACKAGE=
+SOURCE=
+URL=
+SHA256=
 
 run_build () {
-    ./configure --prefix=/usr &&
-
-    make
+    echo -n
 }
 
 run_test () {
-    make check
+    echo -n
 }
 
 run_install () {
-    make install
+    install -pvC $ROOT/scripts/neofetch /usr/bin/neofetch
+    install -pvC $ROOT/scripts/cntstage1 /usr/bin/cntstage1
+    install -pvC $ROOT/scripts/cntstage2 /usr/bin/cntstage2
 }
 
 run_all

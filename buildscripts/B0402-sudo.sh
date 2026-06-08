@@ -1,17 +1,11 @@
 #!/bin/bash
 
-if [ "$INCHROOT" != "1" ]; then
-    echo "Not in chroot"
-    exit 255
-fi
-cd /mnt/shared
 if [ ! -f i_am_at_root ]; then
     echo "/mnt/shared has probably not been mounted to the root of the repo"
     exit 255
 fi
 
-source scripts/_utilities.sh
-source stage1/scripts/_utilities_stage1.sh
+source scripts/_utilities_build.sh
 
 PACKAGE=sudo-1.9.17p2
 SOURCE=sudo-1.9.17p2.tar.gz
@@ -41,7 +35,7 @@ run_install () {
     make install &&
 
     if [ ! -f /etc/sudoers.d/00-sudo ]; then
-        cp /mnt/shared/config/etc/sudoers.d/00-sudo /etc/sudoers.d
+        cp $ROOT/config/etc/sudoers.d/00-sudo /etc/sudoers.d
     fi
 }
 
